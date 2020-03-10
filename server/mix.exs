@@ -37,6 +37,7 @@ defmodule Nfl.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:params, "~> 2.0"},
+      {:corsica, "~> 1.0"},
     ]
   end
 end
