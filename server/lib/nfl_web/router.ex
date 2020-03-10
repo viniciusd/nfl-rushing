@@ -7,5 +7,6 @@ defmodule NflWeb.Router do
 
   scope "/api", NflWeb do
     pipe_through :api
+    get "/players", PlayerController, :index
   end
 end
