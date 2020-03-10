@@ -8,6 +8,7 @@ defmodule Nfl.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      Nfl.DataSource,
       Nfl.Storage,
       NflWeb.Endpoint,
     ]
