@@ -11,8 +11,6 @@ defmodule NflWeb.PlayerView do
   end
 
   def render("player.json", %{player: player}) do
-    %{id: player.id,
-      name: player.name,
-      }
+    player
   end
 end

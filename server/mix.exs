@@ -35,7 +35,8 @@ defmodule Nfl.MixProject do
       {:phoenix, "~> 1.4.15"},
       {:phoenix_pubsub, "~> 1.1"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:params, "~> 2.0"},
     ]
   end
 end
