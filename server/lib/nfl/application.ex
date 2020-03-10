@@ -8,10 +8,8 @@ defmodule Nfl.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Start the endpoint when the application starts
-      NflWeb.Endpoint
-      # Starts a worker by calling: Nfl.Worker.start_link(arg)
-      # {Nfl.Worker, arg},
+      Nfl.Storage,
+      NflWeb.Endpoint,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
