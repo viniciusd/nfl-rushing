@@ -1,5 +1,6 @@
 defmodule Nfl.MixProject do
   use Mix.Project
+      {:corsica, "~> 1.0"},
 
   def project do
     [
