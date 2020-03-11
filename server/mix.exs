@@ -36,6 +36,7 @@ defmodule Nfl.MixProject do
       {:phoenix_pubsub, "~> 1.1"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:ecto, "~> 3.0"},
       {:params, "~> 2.0"},
       {:corsica, "~> 1.0"}
     ]
