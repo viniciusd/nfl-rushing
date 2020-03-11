@@ -45,7 +45,13 @@ Some query parameters are available for filtering, sorting and paginating.
 | `sort`          | string | Yds/TD/Lng |
 | `order`         | string | asc/desc   |
 ```json
-[
+{
+"_links": {
+    "prev": {"href": },
+    "self": {"href": },
+    "next": {"href": }
+},
+"data": [
   {
     "Player":"Joe Banyard",
     "Team":"JAX",
@@ -83,16 +89,16 @@ Some query parameters are available for filtering, sorting and paginating.
 ]
 ```
 
-##### Client Features
+## Client Features
 1. The user is able to sort the players by _Total Rushing Yards_, _Longest Rush_ and _Total Rushing Touchdowns_
 2. The user is able to filter by the player's name
 3. The user is able to download the sorted data as a CSV, as well as a filtered subset
 
-##### Server Features
+## Server Features
 2. The system is able to provide every feature required by the client
 2. The system is able to potentially support larger sets of data on the order of 10k records.
 
-## Installing
+## Installing and running
 
 ### 🐳 Using Docker
 Plain and simple: Given the entire build process is described in the Dockerfile, all it takes is cloning this repo, building, and running its image
@@ -119,3 +125,28 @@ $ mix phx.server
 $ python -m webbrowser "http://localhost:5000"
 ```
 
+## Running the tests
+
+That's gonna be even simpler!
+
+Considering you have already cloned this repo...
+
+### ⚛️  Javascript tests
+```bash
+$ cd client
+$ npm test
+```
+
+### ⚗️ Elixir tests
+```bash
+$ cd server
+$ mix test
+```
+
+## Decisions and assumptions
+
+* With regards to the back-end stack, I picked Elixir as the development language (even though this is the larged project I created with it), and Phoenix as the web framework
+* On the other hand, for the front-end, I chose React. It was an excellent opportunity for learning React, given I had never used it before nor I have much experience with front-end development
+* Given the static source of data and the small volume (in the order of 10k), I decided to perform every action in memory using the back-end server. For greater volumes of data, I would use PostgreSQL as a database and query it on demand. Even though we are talking about JSON data, PostgreSQL can be very efficient with its JSONB datatype and even index on it -- which would be an asset for sorting
+* Taking into account the fact the Erlang/Elixir can effectively serve static files, that's the path I've taken for them even though the client is developed separetely
+* Simple pagination was adapoted using only previous and next options. As the pagination standard, I opted for following the [HAL specification](http://stateless.co/hal_specification.html)
