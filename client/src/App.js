@@ -30,11 +30,13 @@ function App() {
   ];
 
   const [records, setRecords] = React.useState([]);
-  const [previous, setPrevious] = React.useState("");
-  const [current, setCurrent] = React.useState(
+  const [requestUrl, setRequestUrl] = React.useState(
     "http://localhost:4000/api/players"
   );
-  const [next, setNext] = React.useState("");
+  const [pagination, setPagination] = React.useState({
+    next: "",
+    previous: ""
+  });
   const [sorting, setSorting] = React.useState({
     columns: ["Yds", "Lng", "TD"],
     order: "asc",
@@ -47,11 +49,11 @@ function App() {
   }
 
   function previousPage() {
-    setCurrent(previous);
+    setRequestUrl(pagination.previous);
   }
 
   function nextPage() {
-    setCurrent(next);
+    setRequestUrl(pagination.next);
   }
 
   function sortBy(header) {
@@ -76,7 +78,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    let url = new URL(current);
+    let url = new URL(requestUrl);
     const params = new URLSearchParams(url.search);
 
     if (sorting.order !== null && sorting.by !== null) {
@@ -90,30 +92,27 @@ function App() {
     url.search = params;
     url = url.toString();
 
-    if (url !== current) {
-      setCurrent(url);
+    if (url !== requestUrl) {
+      setRequestUrl(url);
     }
-  }, [current, sorting]);
+  }, [requestUrl, sorting]);
 
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const records = await fetchRecords(current);
-        const currentPage = records["_links"]["self"]["href"];
-        if (currentPage !== current) {
-          setRecords(records.data);
-          setPrevious(
-            records["_links"]["prev"] && records["_links"]["prev"]["href"]
-          );
-          setNext(records["_links"]["next"]["href"]);
-          setCurrent(currentPage);
-        }
+        const records = await fetchRecords(requestUrl);
+        setRecords(records.data);
+        setPagination({
+          previous:
+            records["_links"]["prev"] && records["_links"]["prev"]["href"],
+          next: records["_links"]["next"]["href"]
+        });
       } catch (err) {
         setError(err.message);
       }
     }
     fetchData();
-  }, [current]);
+  }, [requestUrl]);
 
   return (
     <div className="App">
@@ -129,7 +128,7 @@ function App() {
           records={records}
         />
         <Pagination
-          disablePrevious={!previous}
+          disablePrevious={!pagination.previous}
           previousPageCallback={previousPage}
           nextPageCallback={nextPage}
         />
