@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+table thead .sorting:after {
+    background-image: url("sort_both.png");
+}
+table thead .sorting-asc:after {
+    background-image: url("sort_asc.png");
+}
+table thead .sorting-desc:after {
+    background-image: url("sort_desc.png");
+}
+
+table thead .sorting,
+table thead .sorting-asc,
+table thead .sorting-desc {
+    cursor: pointer;
+}
+
+table tbody .sorting {
+    background-color: #dddddd63;
+}
+
+table thead .sorting:after,
+table thead .sorting-asc:after,
+table thead .sorting-desc:after {
+    content: "\2002";
+    font-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: center right;
+}

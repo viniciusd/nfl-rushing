@@ -28,12 +28,18 @@ function App() {
     "40+",
     "FUM"
   ];
+
   const [records, setRecords] = React.useState([]);
   const [previous, setPrevious] = React.useState("");
   const [current, setCurrent] = React.useState(
     "http://localhost:4000/api/players"
   );
   const [next, setNext] = React.useState("");
+  const [sorting, setSorting] = React.useState({
+    columns: ["Yds", "Lng", "TD"],
+    order: "desc",
+    by: null
+  });
   const [error, setError] = React.useState("");
 
   async function filter(name) {
@@ -46,6 +52,18 @@ function App() {
 
   function nextPage() {
     setCurrent(next);
+  }
+
+  function sortBy(header) {
+    return () => {
+      if (sorting.columns.includes(header)) {
+        setSorting({
+          ...sorting,
+          by: header,
+          order: sorting.order === "desc" ? "asc" : "desc"
+        });
+      }
+    };
   }
 
   React.useEffect(() => {
@@ -75,7 +93,12 @@ function App() {
         <div className="p-4">
           <Filter onChangeCallback={filter} />
         </div>
-        <Table headers={headers} records={records} />
+        <Table
+          sortBy={sortBy}
+          sorting={sorting}
+          headers={headers}
+          records={records}
+        />
         <Pagination
           disablePrevious={!previous}
           previousPageCallback={previousPage}
