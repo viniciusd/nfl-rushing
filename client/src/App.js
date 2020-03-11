@@ -30,7 +30,9 @@ function App() {
   ];
   const [records, setRecords] = React.useState([]);
   const [previous, setPrevious] = React.useState("");
-  const [current, setCurrent] = React.useState("http://localhost:4000/api/players");
+  const [current, setCurrent] = React.useState(
+    "http://localhost:4000/api/players"
+  );
   const [next, setNext] = React.useState("");
   const [error, setError] = React.useState("");
 
@@ -52,10 +54,12 @@ function App() {
         const records = await fetchRecords(current);
         const currentPage = records["_links"]["self"]["href"];
         if (currentPage !== current) {
-            setRecords(records.data);
-            setPrevious(records["_links"]["prev"] && records["_links"]["prev"]["href"]);
-            setNext(records["_links"]["next"]["href"]);
-            setCurrent(currentPage);
+          setRecords(records.data);
+          setPrevious(
+            records["_links"]["prev"] && records["_links"]["prev"]["href"]
+          );
+          setNext(records["_links"]["next"]["href"]);
+          setCurrent(currentPage);
         }
       } catch (err) {
         setError(err.message);
@@ -72,7 +76,11 @@ function App() {
           <Filter onChangeCallback={filter} />
         </div>
         <Table headers={headers} records={records} />
-        <Pagination disablePrevious={!previous} previousPageCallback={previousPage} nextPageCallback={nextPage}/>
+        <Pagination
+          disablePrevious={!previous}
+          previousPageCallback={previousPage}
+          nextPageCallback={nextPage}
+        />
       </header>
     </div>
   );
