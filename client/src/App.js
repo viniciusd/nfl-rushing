@@ -37,7 +37,7 @@ function App() {
   const [next, setNext] = React.useState("");
   const [sorting, setSorting] = React.useState({
     columns: ["Yds", "Lng", "TD"],
-    order: "desc",
+    order: "asc",
     by: null
   });
   const [error, setError] = React.useState("");
@@ -57,14 +57,43 @@ function App() {
   function sortBy(header) {
     return () => {
       if (sorting.columns.includes(header)) {
+        let order;
+        if (sorting.order === null || sorting.by !== header) {
+          order = "desc";
+        } else if (sorting.order === "desc") {
+          order = "asc";
+        } else if (sorting.order === "asc") {
+          order = null;
+        }
+
         setSorting({
           ...sorting,
-          by: header,
-          order: sorting.order === "desc" ? "asc" : "desc"
+          by: order !== null ? header : null,
+          order: order
         });
       }
     };
   }
+
+  React.useEffect(() => {
+    let url = new URL(current);
+    const params = new URLSearchParams(url.search);
+
+    if (sorting.order !== null && sorting.by !== null) {
+      params.set("sort", sorting.by);
+      params.set("order", sorting.order);
+    } else {
+      params.delete("sort");
+      params.delete("order");
+    }
+
+    url.search = params;
+    url = url.toString();
+
+    if (url !== current) {
+      setCurrent(url);
+    }
+  }, [current, sorting]);
 
   React.useEffect(() => {
     async function fetchData() {
