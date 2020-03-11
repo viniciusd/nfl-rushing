@@ -47,9 +47,9 @@ Some query parameters are available for filtering, sorting and paginating.
 ```json
 {
 "_links": {
-    "prev": {"href": },
-    "self": {"href": },
-    "next": {"href": }
+    "prev": {"href": "http://.../"},
+    "self": {"href": "http://.../"},
+    "next": {"href": "http://.../"}
 },
 "data": [
   {
@@ -145,8 +145,13 @@ $ mix test
 
 ## Decisions and assumptions
 
+* Yeah, we could make an entire application using server-side rendering (maybe even trying out [LiveView](https://github.com/phoenixframework/phoenix_live_view)!), but I decided to decouple both front-end and back-end. Having the front-end project on its own makes it possible to deploy its build on a CDN (e.g. [Cloudflare](https://www.cloudflare.com)). Not only that, but it also makes possible to have different people working independently and simultaneously on both parts.
 * With regards to the back-end stack, I picked Elixir as the development language (even though this is the larged project I created with it), and Phoenix as the web framework
 * On the other hand, for the front-end, I chose React. It was an excellent opportunity for learning React, given I had never used it before nor I have much experience with front-end development
 * Given the static source of data and the small volume (in the order of 10k), I decided to perform every action in memory using the back-end server. For greater volumes of data, I would use PostgreSQL as a database and query it on demand. Even though we are talking about JSON data, PostgreSQL can be very efficient with its JSONB datatype and even index on it -- which would be an asset for sorting
 * Taking into account the fact the Erlang/Elixir can effectively serve static files, that's the path I've taken for them even though the client is developed separetely
 * Simple pagination was adapoted using only previous and next options. As the pagination standard, I opted for following the [HAL specification](http://stateless.co/hal_specification.html)
+* I am currently using a transient GenServer for fetching and parsing the json and sending it to yet another GenServer that keeps the already-parsed structure in memory as its state
+
+### TO-DOs
+* Consider using [Task.Supervisor](https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/5) for running the one-off process of fetching the json data
