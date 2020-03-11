@@ -7,6 +7,8 @@ defmodule Nfl.Players do
     Stream.filter(data, &String.contains?(Map.get(&1, "Player"), name))
   end
 
+  def sort(data, nil, _), do: data
+
   def sort(data, key, "asc") do
     data
     |> Enum.sort_by(&Map.get(&1, key), {:asc, __MODULE__})
