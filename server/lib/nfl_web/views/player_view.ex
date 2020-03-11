@@ -14,7 +14,7 @@ defmodule NflWeb.PlayerView do
     }
   end
 
-  defp build_links(url, %{page_number: 1} = params, page_count) do
+  defp build_links(url, %{page_number: 1} = params, _) do
     %{
       self: %{href: update_query_params(url, params)},
       next: %{href: update_query_params(url, %{params | page_number: params.page_number + 1})}
