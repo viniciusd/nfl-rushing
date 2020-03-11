@@ -46,7 +46,7 @@ function App() {
 
   const [records, setRecords] = React.useState([]);
   const [requestUrl, setRequestUrl] = React.useState(
-    "http://localhost:4000/api/players"
+    "http://localhost:5000/api/players"
   );
   const [pagination, setPagination] = React.useState({
     next: "",
