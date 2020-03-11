@@ -58,13 +58,13 @@ function App() {
   });
   const [error, setError] = React.useState("");
 
-  function previousPage() {
+  const previousPage = () => {
     setRequestUrl(pagination.previous);
-  }
+  };
 
-  function nextPage() {
+  const nextPage = () => {
     setRequestUrl(pagination.next);
-  }
+  };
 
   const setQueryParams = params => {
     const url = updateQueryParams(requestUrl, params);
@@ -73,31 +73,29 @@ function App() {
     setRequestUrl(url);
   };
 
-  function sortBy(header) {
-    return () => {
-      if (sorting.columns.includes(header)) {
-        let order;
-        if (sorting.order === null || sorting.by !== header) {
-          order = "desc";
-        } else if (sorting.order === "desc") {
-          order = "asc";
-        } else if (sorting.order === "asc") {
-          order = null;
-        }
-
-        const by = order !== null ? header : null;
-        setSorting({
-          ...sorting,
-          by: by,
-          order: order
-        });
-        setQueryParams({
-          sort: by || null,
-          order: order || null
-        });
+  const sortBy = header => () => {
+    if (sorting.columns.includes(header)) {
+      let order;
+      if (sorting.order === null || sorting.by !== header) {
+        order = "desc";
+      } else if (sorting.order === "desc") {
+        order = "asc";
+      } else if (sorting.order === "asc") {
+        order = null;
       }
-    };
-  }
+
+      const by = order !== null ? header : null;
+      setSorting({
+        ...sorting,
+        by: by,
+        order: order
+      });
+      setQueryParams({
+        sort: by || null,
+        order: order || null
+      });
+    }
+  };
 
   const setFilter = filter => {
     setQueryParams({ page_number: null, filter: filter || null });
