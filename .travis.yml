@@ -10,7 +10,5 @@ matrix:
       - cd client
     install:
       - npm install
-    before_script:
-      - cd client
     script:
       - npm test
