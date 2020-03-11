@@ -100,7 +100,7 @@ function App() {
   }
 
   const setFilter = filter => {
-    setQueryParams({ filter: filter || null });
+    setQueryParams({ page_number: null, filter: filter || null });
   };
 
   React.useEffect(() => {
