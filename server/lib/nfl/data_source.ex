@@ -14,7 +14,7 @@ defmodule Nfl.DataSource do
   @impl GenServer
   def handle_info(:real_init, state) do
     Application.app_dir(:nfl, "priv")
-    |> Path.join("rushing.json")
+    |> Path.join(Application.get_env(:nfl, :rushing_file))
     |> File.read!()
     |> Jason.decode!()
     |> Nfl.Storage.put()

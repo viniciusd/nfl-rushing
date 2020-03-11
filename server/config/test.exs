@@ -6,5 +6,7 @@ config :nfl, NflWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :nfl, :rushing_file, "rushing_test.json"
+
 # Print only warnings and errors during test
 config :logger, level: :warn
