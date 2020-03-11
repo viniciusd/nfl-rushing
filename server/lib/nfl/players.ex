@@ -8,13 +8,11 @@ defmodule Nfl.Players do
   end
 
   def sort(data, key, "asc") do
-    IO.inspect({key, "asc"})
     data
     |> Enum.sort_by(&Map.get(&1, key), {:asc, __MODULE__})
   end
 
   def sort(data, key, "desc") do
-    IO.inspect({key, "desc"})
     data
     |> Enum.sort_by(&Map.get(&1, key), {:desc, __MODULE__})
   end
