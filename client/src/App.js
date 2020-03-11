@@ -53,9 +53,7 @@ function App() {
         const currentPage = records["_links"]["self"]["href"];
         if (currentPage !== current) {
             setRecords(records.data);
-            if (records["_links"]["prev"]) {
-                setPrevious(records["_links"]["prev"]["href"]);
-            }
+            setPrevious(records["_links"]["prev"] && records["_links"]["prev"]["href"]);
             setNext(records["_links"]["next"]["href"]);
             setCurrent(currentPage);
         }
