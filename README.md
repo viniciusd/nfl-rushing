@@ -3,6 +3,7 @@
 <p align="center">
   <img src="/.images/screenshot.png" width=780>
 </p>
+
 *A quick demo of a React client that reads NFL rushing data from an Elixir back-end*
 nfl-rushing back-end is a service that provides a single HTTP endpoint:
 ```
