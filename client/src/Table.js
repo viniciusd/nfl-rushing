@@ -19,6 +19,13 @@ function Table({ headers, records }) {
           </tr>
         ))}
       </tbody>
+      <tfoot>
+        <tr>
+          {headers.map(header => (
+            <th key={header}>{header}</th>
+          ))}
+        </tr>
+      </tfoot>
     </table>
   );
 }
