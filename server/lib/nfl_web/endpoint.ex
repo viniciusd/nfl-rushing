@@ -18,7 +18,7 @@ defmodule NflWeb.Endpoint do
     at: "/",
     from: :nfl,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(static index.html css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -39,7 +39,7 @@ defmodule NflWeb.Endpoint do
   plug Plug.Session, @session_options
 
   plug Corsica,
-    origins: "http://localhost:3000",
+    origins: "http://localhost:5000",
     allow_headers: ["Content-Type"],
     log: [rejected: :error, invalid: :warn, accepted: :debug]
 
