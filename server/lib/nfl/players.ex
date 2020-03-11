@@ -30,14 +30,20 @@ defmodule Nfl.Players do
 
   def paginate(data, page_number, page_size) when page_number > 0 and page_size > 0 do
     start = (page_number - 1) * page_size
+    page_count = data |> Enum.count() |> Kernel./(page_size) |> Float.ceil() |> trunc
 
-    data
-    |> Stream.drop(start)
-    |> Stream.take(page_size)
+    {page_count,
+     data
+     |> Stream.drop(start)
+     |> Stream.take(page_size)}
   end
 
   def paginate(data, _, _) do
-    data
+    {nil, data}
+  end
+
+  def collect({value, data}) do
+    {value, Enum.to_list(data)}
   end
 
   def collect(data) do

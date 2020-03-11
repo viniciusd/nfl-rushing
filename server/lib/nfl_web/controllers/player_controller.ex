@@ -22,15 +22,18 @@ defmodule NflWeb.PlayerController do
       |> players
       |> Params.to_map()
 
-    IO.inspect(params)
-
-    players =
+    {page_count, players} =
       Players.list()
       |> Players.filter(Map.get(params, :filter))
       |> Players.sort(Map.get(params, :sort), Map.get(params, :order))
       |> Players.paginate(Map.get(params, :page_number), Map.get(params, :page_size))
       |> Players.collect()
 
-    render(conn, "index.json", players: players, url: Plug.Conn.request_url(conn), params: params)
+    render(conn, "index.json",
+      players: players,
+      url: Plug.Conn.request_url(conn),
+      params: params,
+      page_count: page_count
+    )
   end
 end
