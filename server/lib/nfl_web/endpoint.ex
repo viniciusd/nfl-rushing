@@ -39,7 +39,7 @@ defmodule NflWeb.Endpoint do
   plug Plug.Session, @session_options
 
   plug Corsica,
-    origins: "http://localhost:5000",
+    origins: ~r{^https?://(.*.?)localhost(:\d+)?$},
     allow_headers: ["Content-Type"],
     log: [rejected: :error, invalid: :warn, accepted: :debug]
 
