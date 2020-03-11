@@ -9,7 +9,6 @@ async function fetchRecords(url) {
   const resp = await axios.get(url);
   return resp.data;
 }
-
 function updateQueryParams(requestUrl, updateParams) {
   let url = new URL(requestUrl);
   const params = new URLSearchParams(url.search);
@@ -45,7 +44,7 @@ function App() {
 
   const [records, setRecords] = React.useState([]);
   const [requestUrl, setRequestUrl] = React.useState(
-    "http://localhost:5000/api/players"
+    process.env.REACT_APP_API_URL
   );
   const [pagination, setPagination] = React.useState({
     next: "",
