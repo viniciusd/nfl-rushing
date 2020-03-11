@@ -56,7 +56,6 @@ function App() {
     order: "asc",
     by: null
   });
-  const [filter, setFilter] = React.useState("");
   const [error, setError] = React.useState("");
 
   function previousPage() {
@@ -67,12 +66,12 @@ function App() {
     setRequestUrl(pagination.next);
   }
 
-  const setQueryParams = (params) => {
-	  const url = updateQueryParams(requestUrl, params);
-	  console.log(requestUrl, params, url);
+  const setQueryParams = params => {
+    const url = updateQueryParams(requestUrl, params);
+    console.log(requestUrl, params, url);
 
-	  setRequestUrl(url);
-  }
+    setRequestUrl(url);
+  };
 
   function sortBy(header) {
     return () => {
@@ -86,25 +85,23 @@ function App() {
           order = null;
         }
 
+        const by = order !== null ? header : null;
         setSorting({
           ...sorting,
-          by: order !== null ? header : null,
+          by: by,
           order: order
+        });
+        setQueryParams({
+          sort: by || null,
+          order: order || null
         });
       }
     };
   }
 
-  React.useEffect(() => {
+  const setFilter = filter => {
     setQueryParams({ filter: filter || null });
-  }, [filter]);
-
-  React.useEffect(() => {
-    setQueryParams({
-      sort: sorting.by || null,
-      order: sorting.order || null
-    });
-  }, [sorting]);
+  };
 
   React.useEffect(() => {
     async function fetchData() {
