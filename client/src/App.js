@@ -10,6 +10,21 @@ async function fetchRecords(url) {
   return resp.data;
 }
 
+function updateQueryParams(requestUrl, updateParams) {
+  let url = new URL(requestUrl);
+  const params = new URLSearchParams(url.search);
+
+  for (const key of Object.keys(updateParams)) {
+    if (updateParams[key] === null) {
+      params.delete(key);
+    } else {
+      params.set(key, updateParams[key]);
+    }
+
+    url.search = params;
+    return new URL(url.toString());
+  }
+}
 function App() {
   const headers = [
     "Player",
@@ -42,11 +57,8 @@ function App() {
     order: "asc",
     by: null
   });
+  const [filter, setFilter] = React.useState("");
   const [error, setError] = React.useState("");
-
-  async function filter(name) {
-    setRecords(await applyFilter(name));
-  }
 
   function previousPage() {
     setRequestUrl(pagination.previous);
@@ -54,6 +66,13 @@ function App() {
 
   function nextPage() {
     setRequestUrl(pagination.next);
+  }
+
+  const setQueryParams = (params) => {
+	  const url = updateQueryParams(requestUrl, params);
+	  console.log(requestUrl, params, url);
+
+	  setRequestUrl(url);
   }
 
   function sortBy(header) {
@@ -78,24 +97,15 @@ function App() {
   }
 
   React.useEffect(() => {
-    let url = new URL(requestUrl);
-    const params = new URLSearchParams(url.search);
+    setQueryParams({ filter: filter || null });
+  }, [filter]);
 
-    if (sorting.order !== null && sorting.by !== null) {
-      params.set("sort", sorting.by);
-      params.set("order", sorting.order);
-    } else {
-      params.delete("sort");
-      params.delete("order");
-    }
-
-    url.search = params;
-    url = url.toString();
-
-    if (url !== requestUrl) {
-      setRequestUrl(url);
-    }
-  }, [requestUrl, sorting]);
+  React.useEffect(() => {
+    setQueryParams({
+      sort: sorting.by || null,
+      order: sorting.order || null
+    });
+  }, [sorting]);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -119,7 +129,7 @@ function App() {
       <header className="App-header">
         {error && <span>{error}</span>}
         <div className="p-4">
-          <Filter onChangeCallback={filter} />
+          <Filter onChangeCallback={setFilter} />
         </div>
         <Table
           sortBy={sortBy}
@@ -135,11 +145,6 @@ function App() {
       </header>
     </div>
   );
-}
-
-async function applyFilter(name) {
-  const records = (await fetchRecords()).data;
-  return records.filter(record => record["Player"].includes(name));
 }
 
 export default App;
