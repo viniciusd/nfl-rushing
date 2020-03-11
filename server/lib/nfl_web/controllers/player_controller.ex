@@ -12,7 +12,7 @@ defmodule NflWeb.PlayerController do
       sort: :string,
       order: :string,
       page_number: [field: :integer, default: 1],
-      page_size: [field: :integer, default: 10],
+      page_size: [field: :integer, default: 10]
     })
   )
 

@@ -5,13 +5,13 @@ defmodule Nfl.Players do
 
   def filter(data, name, field \\ "Player") do
     query = name |> String.downcase()
+
     Stream.filter(data, fn str ->
       str
       |> Map.get(field)
       |> String.downcase()
       |> String.contains?(query)
-    end
-    )
+    end)
   end
 
   def sort(data, nil, _), do: data
@@ -29,7 +29,7 @@ defmodule Nfl.Players do
   def sort(data, _, _), do: data
 
   def paginate(data, page_number, page_size) when page_number > 0 and page_size > 0 do
-    start = (page_number-1) * page_size
+    start = (page_number - 1) * page_size
 
     data
     |> Stream.drop(start)
