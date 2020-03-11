@@ -156,3 +156,4 @@ $ mix test
 
 ### TO-DOs
 * Consider using [Task.Supervisor](https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/5) for running the one-off process of fetching the json data
+* Mocking the back-end response in the front-end and performing funtional tests using the (React Testing Library)[https://testing-library.com/docs/react-testing-library/intro]
