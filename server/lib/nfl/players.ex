@@ -3,8 +3,15 @@ defmodule Nfl.Players do
     Nfl.Storage.get()
   end
 
-  def filter(data, name) do
-    Stream.filter(data, &String.contains?(Map.get(&1, "Player"), name))
+  def filter(data, name, field \\ "Player") do
+    query = name |> String.downcase()
+    Stream.filter(data, fn str ->
+      str
+      |> Map.get(field)
+      |> String.downcase()
+      |> String.contains?(query)
+    end
+    )
   end
 
   def sort(data, nil, _), do: data
