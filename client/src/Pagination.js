@@ -2,6 +2,7 @@ import React from "react";
 
 function Pagination({
   disablePrevious,
+  disableNext,
   previousPageCallback,
   nextPageCallback
 }) {
@@ -15,7 +16,11 @@ function Pagination({
         >
           Previous
         </button>
-        <button className="btn btn-outline-primary" onClick={nextPageCallback}>
+        <button
+          className="btn btn-outline-primary"
+          onClick={nextPageCallback}
+          disabled={disableNext}
+        >
           Next
         </button>
       </div>

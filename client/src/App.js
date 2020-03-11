@@ -111,7 +111,7 @@ function App() {
         setPagination({
           previous:
             records["_links"]["prev"] && records["_links"]["prev"]["href"],
-          next: records["_links"]["next"]["href"]
+          next: records["_links"]["next"] && records["_links"]["next"]["href"]
         });
       } catch (err) {
         setError(err.message);
@@ -135,6 +135,7 @@ function App() {
         />
         <Pagination
           disablePrevious={!pagination.previous}
+          disableNext={!pagination.next}
           previousPageCallback={previousPage}
           nextPageCallback={nextPage}
         />
