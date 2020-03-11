@@ -5,10 +5,6 @@ import Pagination from "./Pagination";
 import Table from "./Table";
 import "bootstrap/dist/css/bootstrap.css";
 
-async function fetchRecords(url) {
-  const resp = await axios.get(url);
-  return resp.data;
-}
 function updateQueryParams(requestUrl, updateParams) {
   let url = new URL(requestUrl);
   const params = new URLSearchParams(url.search);
@@ -102,7 +98,7 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const records = await fetchRecords(requestUrl);
+        const records = (await axios.get(requestUrl)).data;
         setRecords(records.data);
         setPagination({
           previous:
