@@ -11,5 +11,7 @@ matrix:
     - language: elixir
       elixir:
         - '1.10.2'
+      otp_release:
+        - '22.2.8'
       before_install:
         - cd server
