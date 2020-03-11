@@ -67,7 +67,6 @@ function App() {
 
   const setQueryParams = params => {
     const url = updateQueryParams(requestUrl, params);
-    console.log(requestUrl, params, url);
 
     setRequestUrl(url);
   };
