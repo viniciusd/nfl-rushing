@@ -20,10 +20,9 @@ function updateQueryParams(requestUrl, updateParams) {
     } else {
       params.set(key, updateParams[key]);
     }
-
-    url.search = params;
-    return new URL(url.toString());
   }
+  url.search = params;
+  return new URL(url.toString());
 }
 function App() {
   const headers = [
