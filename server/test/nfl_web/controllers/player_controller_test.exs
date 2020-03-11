@@ -16,7 +16,7 @@ defmodule NflWeb.PlayerControllerTest do
 
   def fixture(:player) do
     {:ok, player} = Accounts.create_player(@create_attrs)
-    player 
+    player
   end
 
   setup %{conn: conn} do

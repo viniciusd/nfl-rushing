@@ -38,10 +38,10 @@ defmodule NflWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
 
-
   plug Corsica,
     origins: "http://localhost:3000",
     allow_headers: ["Content-Type"],
     log: [rejected: :error, invalid: :warn, accepted: :debug]
+
   plug NflWeb.Router
 end

@@ -15,9 +15,10 @@ defmodule Nfl.DataSource do
   def handle_info(:real_init, state) do
     Application.app_dir(:nfl, "priv")
     |> Path.join("rushing.json")
-    |> File.read!
-    |> Jason.decode!    
-    |> Nfl.Storage.put
+    |> File.read!()
+    |> Jason.decode!()
+    |> Nfl.Storage.put()
+
     {:stop, :normal, state}
   end
 end

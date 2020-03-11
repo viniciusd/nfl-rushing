@@ -10,7 +10,7 @@ defmodule Nfl.Application do
     children = [
       Nfl.DataSource,
       Nfl.Storage,
-      NflWeb.Endpoint,
+      NflWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

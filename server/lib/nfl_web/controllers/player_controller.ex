@@ -6,18 +6,19 @@ defmodule NflWeb.PlayerController do
 
   action_fallback NflWeb.FallbackController
 
-
-  defparams players %{
-    filter: [field: :string, default: ""],
-    page_number: [field: :integer, default: 1],
-    page_size: [field: :integer, default: 10],
-  }
+  defparams(
+    players(%{
+      filter: [field: :string, default: ""],
+      page_number: [field: :integer, default: 1],
+      page_size: [field: :integer, default: 10]
+    })
+  )
 
   def index(conn, params) do
     params =
       params
       |> players
-      |> Params.to_map
+      |> Params.to_map()
 
     players =
       Players.list()
