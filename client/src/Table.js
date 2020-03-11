@@ -1,4 +1,5 @@
 import React from "react";
+import "./table.css";
 
 function Table({ sortBy, sorting, headers, records }) {
   const headerClass = header => {
