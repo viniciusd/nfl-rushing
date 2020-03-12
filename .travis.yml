@@ -15,7 +15,8 @@ matrix:
         - '22.2.8'
       before_install:
         - cd server
-    - sudo: required
+    - language: general
+      sudo: required
       services:
         - docker
       install:
