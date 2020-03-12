@@ -83,7 +83,7 @@ function App() {
     setQueryParams({ page_number: null, filter: filter || null });
   };
 
-  const downloadUrl = url => updateQueryParams(url, { download: true });
+  const downloadUrl = url => updateQueryParams(url, { csv: true });
 
   React.useEffect(() => {
     async function fetchData() {

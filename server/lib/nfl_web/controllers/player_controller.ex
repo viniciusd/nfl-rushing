@@ -16,7 +16,7 @@ defmodule NflWeb.PlayerController do
     })
   )
 
-  def index(conn, %{"download" =>  _} = params) do
+  def index(conn, %{"csv" =>  _} = params) do
     params =
       params
       |> players
