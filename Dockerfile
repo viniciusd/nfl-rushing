@@ -1,6 +1,7 @@
 FROM node:12.2.0-alpine AS client
 WORKDIR /app
 COPY client /app
+RUN npm install
 RUN npm run-script build
 
 FROM elixir:1.10.2-alpine AS server
