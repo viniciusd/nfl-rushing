@@ -84,8 +84,13 @@ defmodule Nfl.Players do
 
   defp parse_int(value) when is_number(value), do: value
 
+  defp strip_delimiter(value) do
+    value
+    |> String.replace(",", "")
+  end
+
   defp parse_int(value) do
-    case Integer.parse(value) do
+    case value |> strip_delimiter() |> Integer.parse() do
       {int, _} -> int
       :error -> value
     end
