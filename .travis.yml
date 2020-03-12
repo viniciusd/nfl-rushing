@@ -15,3 +15,8 @@ matrix:
         - '22.2.8'
       before_install:
         - cd server
+    - sudo: required
+      services:
+        - docker
+      install:
+        - docker build .
