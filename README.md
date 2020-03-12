@@ -113,7 +113,7 @@ Plain and simple: Given the entire build process is described in the Dockerfile,
 $ git clone https://github.com/viniciusd/nfl-rushing.git
 $ cd nfl-rushing
 $ docker build -t nfl-rushing . 
-$ docker run nfl-rushing
+$ docker run -p 5000:5000 nfl-rushing
 $ python -m webbrowser "http://localhost:5000"
 ```
 
