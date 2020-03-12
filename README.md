@@ -205,3 +205,4 @@ The high-level architecture can be found in the following box diagram.
 * Mocking the back-end response in the front-end and performing funtional tests using the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 * Further testing the Longest Rush sorting, given it is a string and may contain a T representing a touchdown
 * Add unit tests for the CSV related functions in the back-end
+* Asssess using ReasonML with [reason-react](https://reasonml.github.io/reason-react/) for the front-end
