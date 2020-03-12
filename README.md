@@ -44,6 +44,7 @@ Some query parameters are available for filtering, sorting and paginating.
 | `page_size`     | int    | >= 1       |
 | `sort`          | string | Yds/TD/Lng |
 | `order`         | string | asc/desc   |
+| `csv`           | any    | true       |
 ```json
 {
 "_links": {
@@ -87,6 +88,11 @@ Some query parameters are available for filtering, sorting and paginating.
     "FUM":0
   }
 ]
+```
+```csv
+1st,1st%,20+,40+,Att,Att/G,Avg,FUM,Lng,Player,Pos,TD,Team,Yds,Yds/G
+0,0,0,0,2,2,3.5,0,7,Joe Banyard,RB,0,JAX,7,7
+0,0,0,0,5,1.7,1,0,9,Shaun Hill,QB,0,MIN,5,1.7
 ```
 
 ## Client Features
