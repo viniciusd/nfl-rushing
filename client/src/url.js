@@ -13,4 +13,4 @@ function updateQueryParams(requestUrl, updateParams) {
   return url.toString();
 }
 
-export {updateQueryParams};
+export { updateQueryParams };
