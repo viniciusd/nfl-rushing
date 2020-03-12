@@ -48,9 +48,9 @@ defmodule NflWeb.PlayerView do
     player
   end
 
-
   def render("index.csv", %{headers: attributes, players: players}) do
     headers = [attributes |> Enum.join(",")]
+
     headers
     |> Enum.concat(render_many(players, PlayerView, "player.csv"))
     |> Enum.join("\n")
@@ -60,5 +60,4 @@ defmodule NflWeb.PlayerView do
     player
     |> Enum.join(",")
   end
-
 end
