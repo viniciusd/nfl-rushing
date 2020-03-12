@@ -230,12 +230,12 @@ defmodule Nfl.PlayersTest do
   ]
 
   test "list/0 returns all users" do
-    assert Players.list() == @players
+    assert Players.list_all() == @players
   end
 
   test "filter/2 searches for players that contain the given query" do
     result =
-      Players.list()
+      Players.list_all()
       |> Players.filter("Joe")
       |> Players.collect()
 
@@ -244,7 +244,7 @@ defmodule Nfl.PlayersTest do
 
   test "filter/2 performs a case insensitive search" do
     result =
-      Players.list()
+      Players.list_all()
       |> Players.filter("joe")
       |> Players.collect()
 
@@ -253,7 +253,7 @@ defmodule Nfl.PlayersTest do
 
   test "sort/3 can sort by a given key" do
     result =
-      Players.list()
+      Players.list_all()
       |> Players.sort("TD", "asc")
       |> Players.collect()
 
@@ -262,7 +262,7 @@ defmodule Nfl.PlayersTest do
 
   test "sort/3 can sort by descending order" do
     result =
-      Players.list()
+      Players.list_all()
       |> Players.sort("TD", "desc")
       |> Players.collect()
       |> Enum.take(2)
@@ -277,7 +277,7 @@ defmodule Nfl.PlayersTest do
 
   test "paginate/3 can return the given page" do
     {_, first_page} =
-      Players.list()
+      Players.list_all()
       |> Players.paginate(1, 4)
       |> Players.collect()
 
@@ -290,7 +290,7 @@ defmodule Nfl.PlayersTest do
 
   test "paginate/3 returns the page count" do
     {page_count, _} =
-      Players.list()
+      Players.list_all()
       |> Players.paginate(1, 4)
       |> Players.collect()
 
