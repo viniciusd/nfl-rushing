@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
+import DownloadButton from "./DownloadButton";
 import Filter from "./Filter";
 import Pagination from "./Pagination";
 import Table from "./Table";
-import {updateQueryParams} from "./url";
+import { updateQueryParams } from "./url";
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
@@ -82,6 +83,8 @@ function App() {
     setQueryParams({ page_number: null, filter: filter || null });
   };
 
+  const downloadUrl = url => updateQueryParams(url, { download: true });
+
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -106,6 +109,7 @@ function App() {
         <div className="p-4">
           <Filter onChangeCallback={setFilter} />
         </div>
+        <DownloadButton downloadUrl={downloadUrl(requestUrl)} />
         <Table
           sortBy={sortBy}
           sorting={sorting}
