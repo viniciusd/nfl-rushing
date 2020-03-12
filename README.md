@@ -160,6 +160,8 @@ $ mix test
 * I am currently using a transient GenServer for fetching and parsing the json and sending it to yet another GenServer that keeps the already-parsed structure in memory as its state
 
 ### Architecture draft
+The high-level architecture can be found in the following box diagram.
+
 ```
      +-----------+
      | React App |
