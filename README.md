@@ -1,4 +1,4 @@
-![Build status](https://travis-ci.org/viniciusd/nfl-rushing.svg?branch=master)
+[![Build Status](https://travis-ci.org/viniciusd/nfl-rushing.svg?branch=master)](https://travis-ci.org/viniciusd/nfl-rushing)
 # 🏈 nfl-rushing
 > *A quick demo of a React client that reads NFL rushing data from an Elixir back-end*
 
