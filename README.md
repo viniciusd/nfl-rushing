@@ -116,6 +116,13 @@ $ docker build -t nfl-rushing .
 $ docker run -p 5000:5000 nfl-rushing
 $ python -m webbrowser "http://localhost:5000/index.html"
 ```
+Or you can use `docker-compose` instead:
+```bash
+$ git clone https://github.com/viniciusd/nfl-rushing.git
+$ cd nfl-rushing
+$ docker-compose up
+$ python -m webbrowser "http://localhost:5000/index.html"
+```
 
 ### 📜 Without Docker
 
