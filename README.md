@@ -150,7 +150,6 @@ $ mix test
 ```
 
 ## Decisions and assumptions
-
 * Yeah, we could make an entire application using server-side rendering (maybe even trying out [LiveView](https://github.com/phoenixframework/phoenix_live_view)!), but I decided to decouple both front-end and back-end. Having the front-end project on its own makes it possible to deploy its build on a CDN (e.g. [Cloudflare](https://www.cloudflare.com)). Not only that, but it also makes possible to have different people working independently and simultaneously on both parts.
 * Dockerizing: There is an intense war about whether to use or not containers on the BEAM. It is a fact, though, that using Docker allows an easier and reproduceable setup. After all, [it is possible to conciliate the BEAM and the current cloud culture](https://www.youtube.com/watch?v=nLApFANtkHs). Elixir 1.9 has also made it easier by [integrating the releases feature into Elixir itself](https://elixir-lang.org/blog/2019/06/24/elixir-v1-9-0-released/)
 * With regards to the back-end stack, I picked Elixir as the development language (even though this is the larged project I created with it), and Phoenix as the web framework
@@ -159,6 +158,37 @@ $ mix test
 * Taking into account the fact the Erlang/Elixir can effectively serve static files, that's the path I've taken for them even though the client is developed separetely
 * Simple pagination was adapoted using only previous and next options. As the pagination standard, I opted for following the [HAL specification](http://stateless.co/hal_specification.html)
 * I am currently using a transient GenServer for fetching and parsing the json and sending it to yet another GenServer that keeps the already-parsed structure in memory as its state
+
+### Architecture draft
+```
+ +-----------+
+ | React App |
+ +-----------+
+      ||
+      \/
+---------------
+      /\
+      ||
++-------------+
+| Phoenix App |
++-------------+
+       |
++-------------+
+|   Players   | *Plain module*
+|   handler   |
++-------------+
+       |
++-------------+
+|   Data      | *GenServer*
+|   storage   |
++-------------+
+       |
++-------------+
+|   Data      | *GenServer*
+|   source    |
++-------------+
+```
+
 
 ### TO-DOs
 * Consider using [Task.Supervisor](https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/5) for running the one-off process of fetching the json data
