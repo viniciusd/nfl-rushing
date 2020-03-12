@@ -47,4 +47,18 @@ defmodule NflWeb.PlayerView do
   def render("player.json", %{player: player}) do
     player
   end
+
+
+  def render("index.csv", %{headers: attributes, players: players}) do
+    headers = [attributes |> Enum.join(",")]
+    headers
+    |> Enum.concat(render_many(players, PlayerView, "player.csv"))
+    |> Enum.join("\n")
+  end
+
+  def render("player.csv", %{player: player}) do
+    player
+    |> Enum.join(",")
+  end
+
 end

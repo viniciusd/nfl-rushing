@@ -1,6 +1,18 @@
 defmodule Nfl.Players do
-  def list() do
+  def list_all() do
     Nfl.Storage.get()
+  end
+
+  def to_list(data) do
+    data
+    |> Stream.map(&Map.values/1)
+  end
+
+  def attributes() do
+    list_all()
+    |> Stream.take(1)
+    |> Stream.map(&Map.keys/1)
+    |> Enum.at(0)
   end
 
   def filter(data, name, field \\ "Player") do
