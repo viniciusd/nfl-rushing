@@ -114,7 +114,7 @@ $ git clone https://github.com/viniciusd/nfl-rushing.git
 $ cd nfl-rushing
 $ docker build -t nfl-rushing . 
 $ docker run -p 5000:5000 nfl-rushing
-$ python -m webbrowser "http://localhost:5000"
+$ python -m webbrowser "http://localhost:5000/index.html"
 ```
 
 ### 📜 Without Docker
@@ -128,7 +128,7 @@ $ npm build
 $ cp build ../server/priv/static
 $ cd ../server
 $ mix phx.server
-$ python -m webbrowser "http://localhost:5000"
+$ python -m webbrowser "http://localhost:5000/index.html"
 ```
 
 ## Running the tests
