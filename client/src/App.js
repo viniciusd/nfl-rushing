@@ -40,6 +40,7 @@ function App() {
     by: null
   });
   const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
 
   const previousPage = () => {
     setRequestUrl(pagination.previous);
@@ -88,7 +89,9 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
         const records = (await axios.get(requestUrl)).data;
+        setLoading(false);
         setRecords(records.data);
         setPagination({
           previous:
@@ -105,17 +108,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {error && <span>{error}</span>}
         <div className="p-4">
           <Filter onChangeCallback={setFilter} />
         </div>
         <DownloadButton downloadUrl={downloadUrl(requestUrl)} />
-        <Table
-          sortBy={sortBy}
-          sorting={sorting}
-          headers={headers}
-          records={records}
-        />
+        {error ? (
+          <h1 className="d-flex w-100 justify-content-center">
+            <span className="badge badge-warning">{error}</span>
+          </h1>
+        ) : loading ? (
+          <div className="d-flex justify-content-center m-4">
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <Table
+            sortBy={sortBy}
+            sorting={sorting}
+            headers={headers}
+            records={records}
+          />
+        )}
         <Pagination
           disablePrevious={!pagination.previous}
           disableNext={!pagination.next}
