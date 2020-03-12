@@ -195,6 +195,6 @@ The high-level architecture can be found in the following box diagram.
 
 ### TO-DOs
 * Consider using [Task.Supervisor](https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/5) for running the one-off process of fetching the json data
-* Mocking the back-end response in the front-end and performing funtional tests using the (React Testing Library)[https://testing-library.com/docs/react-testing-library/intro]
+* Mocking the back-end response in the front-end and performing funtional tests using the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 * Further testing the Longest Rush sorting, given it is a string and may contain a T representing a touchdown
 * Add unit tests for the CSV related functions in the back-end
