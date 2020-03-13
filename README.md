@@ -206,3 +206,4 @@ The high-level architecture can be found in the following box diagram.
 * Further testing the Longest Rush sorting, given it is a string and may contain a T representing a touchdown
 * Add unit tests for the CSV related functions in the back-end
 * Asssess using ReasonML with [reason-react](https://reasonml.github.io/reason-react/) for the front-end
+* Make sure the data storage, if restarted, can be filled again with the data sourced. That means the data source won't be transient anymore
